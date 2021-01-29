@@ -5,7 +5,7 @@ library("tidyr")
 library("data.table")
 library("ggplot2")
 
-setwd("/home/architex/Desktop/Epigenetics")
+setwd("/path/to/epigenetic/mod/.bed/file")
 
 #Before running this script, please check whether the current wd has the files
 
@@ -60,7 +60,7 @@ all_Dij <- c()
 all_HiC <- c()
 all_Dij_med <- c()
 all_HiC_med <- c()
-setwd("/home/architex/Desktop/Epigenetics/HiC_matrix")
+setwd("/path/to/HiC/matrix/files")
 for (p in 1:21) {
   for (q in (p+1):22) {
     
@@ -150,72 +150,8 @@ intervalNames=seq((minimum+intervalWidth/2.0),(maximum-intervalWidth/2.0),interv
 boxplot(D~Grouped_HiC_distance,HiC_D,outline = FALSE, boxlty = 1,
         whisklty = 1, staplelty = 1,las=2,names=round(intervalNames,2),
         xlab = "Spatial proximity", ylab = "Histone modification distance D(i,j)",
-        main="H3K27ac",cex.lab=1.3, cex.main=1.5)
+        main="name_of_modification",cex.lab=1.3, cex.main=1.5)
 
-
-
-
-
-
-#plot(all_HiC,all_Dij,xlim = c(0,100),ylim = c(0,4),main = "Histone Modification <- H3K27ac",xlab = "Spatial Proximity",ylab = "Histone Modification Differences D(i,j)")
-data <- data.frame(Hi_C_Distance = all_HiC, Dij = all_Dij)
-data <- subset(data,Hi_C_Distance <= 0.55 & Hi_C_Distance >= -0.30)
-
-#dataa <- subset(data,Hi_C_Distance == -0.30)
-
-data1 <- subset(data,Hi_C_Distance >= -0.30 & Hi_C_Distance < -0.25)
-data2 <- subset(data,Hi_C_Distance >= -0.25 & Hi_C_Distance < -0.20)
-data3 <- subset(data,Hi_C_Distance >= -0.20 & Hi_C_Distance < -0.15)
-data4 <- subset(data,Hi_C_Distance >= -0.15 & Hi_C_Distance < -0.10)
-data5 <- subset(data,Hi_C_Distance >= -0.10 & Hi_C_Distance < -0.05)
-data6 <- subset(data,Hi_C_Distance >= -0.05 & Hi_C_Distance < 0.00)
-data7 <- subset(data,Hi_C_Distance >= 0.00 & Hi_C_Distance < 0.05)
-data8 <- subset(data,Hi_C_Distance >= 0.05 & Hi_C_Distance < 0.10)
-data9 <- subset(data,Hi_C_Distance >= 0.10 & Hi_C_Distance < 0.15)
-data10 <- subset(data,Hi_C_Distance >= 0.15 & Hi_C_Distance < 0.20)
-data11 <- subset(data,Hi_C_Distance >= 0.20 & Hi_C_Distance < 0.25)
-data12 <- subset(data,Hi_C_Distance >= 0.25 & Hi_C_Distance < 0.30)
-data13 <- subset(data,Hi_C_Distance >= 0.30 & Hi_C_Distance < 0.35)
-data14 <- subset(data,Hi_C_Distance >= 0.35 & Hi_C_Distance < 0.40)
-data15 <- subset(data,Hi_C_Distance >= 0.40 & Hi_C_Distance < 0.45)
-data16 <- subset(data,Hi_C_Distance >= 0.45 & Hi_C_Distance < 0.50)
-data17 <- subset(data,Hi_C_Distance >= 0.50 & Hi_C_Distance < 0.55)
-
-
-
-df.list <- list(data1$Dij,data2$Dij,data3$Dij,data4$Dij,data5$Dij,data6$Dij,data7$Dij,data8$Dij,data9$Dij,data10$Dij,data11$Dij,data12$Dij,data13$Dij,data14$Dij,data15$Dij,data16$Dij,data17$Dij)
-res <- lapply(df.list, median)
-HiC_D <- c(-0.30,-0.25,-0.20,-0.15,-0.10,-0.05,0.00,0.05,0.10,0.15,0.20,0.25,0.30,0.35,0.40,0.45,0.50)
-
-plot(HiC_D,res,xaxt = 'n',ylim = c(0,2.5),main = "Correlation of Spatial Proximity with Histone Modification",xlab = "Spatial Proximity", ylab = "Histone Modification Difference D(i,j)", pch = 15, col = "blue")
-axis(1, at = c(-0.3:0.50) )
-axis(1, at = c(-0.2:0.50) )
-axis(1, at = c(-0.1:0.50) )
-axis(1, at = c(0.0:0.50) )
-axis(1, at = c(0.1:0.50) )
-axis(1, at = c(0.2:0.50) )
-axis(1, at = c(0.3:0.50) )
-axis(1, at = c(0.4:0.50) )
-axis(1, at = c(0.5:0.50) )
-
-points(HiC_D,res, pch = 17,col="green")
-
-legend("topright", 
-       legend = c("H3K27ac", "H3K9ac"), 
-       pch = c(15,17),
-       col = c("blue","green"),
-       text.col = "black", 
-       horiz = F)
-
-#data %>%
- # sample_frac(0.009) %>%
-  #ggplot( aes(x=all_HiC, y=all_Dij)) +
-  #geom_point(color="#69b3a2", size=1) +
-  #geom_point(alpha = 0.01) +
-  #theme_light() +
-  #theme(
-   # legend.position="none"
-  #)
 
 
 
